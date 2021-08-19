@@ -27,15 +27,3 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-    - task: Docker@2
-      displayName: Push image
-      inputs:
-       containerRegistry: |
-        uses: docker/login-action@v1
-          with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-       repository: $(imageName)
-       command: push
-       tags: |
-         $(tag)
